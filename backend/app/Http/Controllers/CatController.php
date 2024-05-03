@@ -19,5 +19,41 @@ class CatController extends Controller
         return response()->json($cats);
         }
 
-    // Other CRUD methods as needed
+    public function store(Request $request)
+    {
+        $validated = $request-> validate([
+            'cat_name' => 'required|string|max:255',
+            'cat_age_type' =>'required|string',
+            'cat_breed' =>'required|string',
+            'cat_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cat_description' =>'nullable|string',
+        ]);
+        $cats = Cat::create($validated);
+        return  response()->json($cats, 201);
+    }
+    
+    public function show(Cat $cats)
+    {
+        return $cats;
+    }
+
+    public function update (Request $request, Cat $cats)
+    {
+        $validated = $request->validate([
+            'cat_name' => 'required|string|max:255',
+            'cat_age_type' =>'required|string',
+            'cat_breed' =>'required|string',
+            'cat_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cat_description' =>'nullable|string',
+        ]);
+        $cats->update($validated);
+        return response()->json($cats, 200);
+    }
+
+
+    public function destroy(Cat $cats)
+    {
+        $cats->delete();
+        return response()->json(null, 204);
+    }
 }

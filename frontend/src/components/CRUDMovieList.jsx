@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Cats_API_URL } from '../apiUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import AddMovieModal from './AddMovieModal';
+import AddMovieModal from './AddCatModal';
 function CRUDMovieList() {
   const [cats, setCats] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -53,7 +53,7 @@ function CRUDMovieList() {
     <section className="pb-5 header text-center">
       <div className="container py-1 text-white">
         <header className="py-2">
-          <h1 className="display-5" style={{color:'black'}}>Movie List</h1>
+          <h1 className="display-5" style={{color:'black'}}>Cats List</h1>
         </header>
 
         <div className="top" style={{ display: 'flex', justifyContent:'space-evenly'}}>
@@ -88,8 +88,8 @@ function CRUDMovieList() {
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Rating</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Breed</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>

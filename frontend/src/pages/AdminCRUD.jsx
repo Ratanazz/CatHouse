@@ -1,5 +1,5 @@
 import React from 'react'
-import CRUDMovieList from '../components/CRUDMovieList'
+import CRUDMovieList from '../components/CRUDCatsList'
 import '../App.css';
 function AdminCRUD() {
   return (

@@ -34,7 +34,7 @@ class CatController extends Controller
     
     public function show(Cat $cats)
     {
-        return $cats;
+    return response()->json($cats);
     }
 
     public function update (Request $request, Cat $cats)

@@ -5,7 +5,8 @@ import { Cats_API_URL } from '../apiUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import AddMovieModal from './AddCatModal';
-function CRUDMovieList() {
+
+function CRUDCatsList() {
   const [cats, setCats] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -15,7 +16,7 @@ function CRUDMovieList() {
   const handleCloseModal = () => setShowModal(false);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchCats = async () => {
       try {
         const response = await axios.get(Cats_API_URL);
         setCats(response.data);
@@ -24,22 +25,37 @@ function CRUDMovieList() {
       }
     };
 
-    fetchMovies();
+    fetchCats();
   }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredMovies = cats.filter((cats) =>
-    cats.cat_name.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${Cats_API_URL}/${id}`, {
+        headers: {
+          'X-CSRF-TOKEN': csrfToken
+        }
+      });
+      // Remove the deleted cat from the state only after successful deletion
+      setCats(prevCats => prevCats.filter(cat => cat.id !== id));
+    } catch (error) {
+      console.error('Error deleting cat:', error);
+      // Display an error message to the user
+      // You can use state to manage error messages and display them in the UI
+    }
+  };
+
+  const filteredCats = cats.filter((cat) =>
+    cat.cat_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   useEffect(() => {
-    // Fetch CSRF token from Laravel backend
     const fetchCsrfToken = async () => {
       try {
         const response = await axios.get('/sanctum/csrf-cookie');
-        // Extract CSRF token from response headers
         const token = response.headers['x-csrf-token'];
         setCsrfToken(token);
       } catch (error) {
@@ -94,12 +110,12 @@ function CRUDMovieList() {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredMovies.map((cats, index) => (
-                        <tr key={cats.id}>
+                      {filteredCats.map((cat, index) => (
+                        <tr key={cat.id}>
                           <th scope="row">{index + 1}</th>
-                          <td>{cats.cat_name}</td>
-                          <td>{cats.cat_age_type}</td>
-                          <td>{cats.cat_breed}</td>
+                          <td>{cat.cat_name}</td>
+                          <td>{cat.cat_age_type}</td>
+                          <td>{cat.cat_breed}</td>
                           <td>
                             <ul className="list-inline m-0">
                               <li className="list-inline-item">
@@ -108,7 +124,7 @@ function CRUDMovieList() {
                                 </button>
                               </li>
                               <li className="list-inline-item">
-                                <button className="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete">
+                                <button className="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete" onClick={() => handleDelete(cat.id)}>
                                   <FontAwesomeIcon icon={faTrash} />
                                 </button>
                               </li>
@@ -128,4 +144,4 @@ function CRUDMovieList() {
   );
 }
 
-export default CRUDMovieList;
+export default CRUDCatsList;

@@ -52,7 +52,7 @@ public function update(Request $request, Cat $cat) // note the singular 'cat'
         'cat_name' => 'required|string|max:255',
         'cat_age_type' =>'required|string',
         'cat_breed' =>'required|string',
-        'cat_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'cat_image' => 'nullable', // or remove the line altogether
         'cat_description' =>'nullable|string',
     ]);
 

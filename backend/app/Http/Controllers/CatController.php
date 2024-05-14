@@ -32,28 +32,40 @@ class CatController extends Controller
         return  response()->json($cats, 201);
     }
     
-    public function show(Cat $cats)
-    {
-    return response()->json($cats);
+    public function show($id)
+{
+    // Fetch the cat by ID from the database
+    $cat = Cat::find($id);
+
+    if (!$cat) {
+        // Handle the case where the cat is not found
+        return response()->json(['message' => 'Cat not found'], 404);
     }
 
-    public function update (Request $request, Cat $cats)
-    {
-        $validated = $request->validate([
-            'cat_name' => 'required|string|max:255',
-            'cat_age_type' =>'required|string',
-            'cat_breed' =>'required|string',
-            'cat_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'cat_description' =>'nullable|string',
-        ]);
-        $cats->update($validated);
-        return response()->json($cats, 200);
-    }
+    // Return the found cat as a JSON response
+    return response()->json($cat);
+}
+
+public function update(Request $request, Cat $cat) // note the singular 'cat'
+{
+    $validated = $request->validate([
+        'cat_name' => 'required|string|max:255',
+        'cat_age_type' =>'required|string',
+        'cat_breed' =>'required|string',
+        'cat_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'cat_description' =>'nullable|string',
+    ]);
+
+    $cat->update($validated);
+
+    return response()->json($cat, 200);
+}
 
 
-    public function destroy(Cat $cats)
-    {
-        $cats->delete();
-        return response()->json(null, 204);
-    }
+public function destroy(Cat $cat)
+{
+    $cat->delete();
+
+    return response()->json(['message' => 'Cat deleted successfully'], 200);
+}
 }

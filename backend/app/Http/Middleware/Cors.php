@@ -16,6 +16,7 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
+        
         $corsConfig = Config::get('cors');
         $allowedOrigins = $corsConfig['allowed_origins'];
 

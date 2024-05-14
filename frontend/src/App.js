@@ -1,6 +1,7 @@
 
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './components/AuthContext';
 import NavbarComponent from './components/NavbarComponent';
 import FooterComponent from './components/FooterComponent';
 import Homepage from './pages/Homepage';
@@ -9,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 function App() {
   return (
+    <AuthProvider>
     <Router>
     <NavbarComponent /> 
     <Routes>
@@ -22,6 +24,7 @@ function App() {
     </Routes>
     <FooterComponent/>
   </Router>
+  </AuthProvider>
   );
 }
 

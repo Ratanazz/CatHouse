@@ -1,43 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { MDBBtn, MDBContainer, MDBCard, MDBCardBody, MDBCardImage, MDBRow, MDBCol, MDBIcon, MDBInput } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../components/AuthContext';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginSuccess, setLoginSuccess] = useState(false);
+    const { login } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         try {
-                const response = await fetch('http://localhost:8000/api/login', {
+            const response = await fetch('http://localhost:8000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-                });
+                body: JSON.stringify({ email, password })
+            });
             
-                const data = await response.json();
-             console.log(data); // Log the response for debugging
+            const data = await response.json();
+            console.log(data); // Log the response for debugging
 
-             // Check if login was successful based on the response from the server
-                if (response.ok) {
+            if (response.ok) {
                 setLoginSuccess(true);
-                // Perform additional actions upon successful login, e.g., redirect to another page or store token in local storage
-                } else {
+                login(data.token);
+                // Optionally redirect or perform other actions
+            } else {
                 setLoginSuccess(false);
-                // Handle unsuccessful login, e.g., display an error message to the user
-             }
-                } catch (error) {
-                    console.error('Error:', error);
-                // Handle error, e.g., display an error message to the user
+                // Handle unsuccessful login, e.g., display an error message
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error, e.g., display an error message
         }
     };
 
@@ -62,7 +61,7 @@ function LoginPage() {
                             </form>
                             <a className="small text-muted" href="#!">Forgot password?</a>
                             {loginSuccess && <p className="text-success">Login successful!</p>}
-                            <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}> <Link to="/register" style={{ color: '#393f81' }}>Don't have an account? Create New here</Link></p>
+                            <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}><Link to="/register" style={{ color: '#393f81' }}>Don't have an account? Create New here</Link></p>
                             <div className='d-flex flex-row justify-content-start'>
                                 <a href="#!" className="small text-muted me-1">Terms of use.</a>
                                 <a href="#!" className="small text-muted">Privacy policy</a>

@@ -1,17 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext ,useEffect} from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function NavbarComponent() {
-    const { isLoggedIn, logout } = useContext(AuthContext);
+    const { user, logout,setUser: setAuthUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logout();
-        navigate('/login'); // Redirect to login page after logout
+        navigate('/login');
     };
+    useEffect(() => {
+        const storedUser = JSON.parse(sessionStorage.getItem('user'));
+        if (storedUser) {
+            setAuthUser(storedUser);
+        }
+      }, []);
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -24,7 +30,7 @@ function NavbarComponent() {
                         <Nav.Link as={Link} to="/about">About</Nav.Link>
                     </Nav>
                     <Nav>
-                        {isLoggedIn ? (
+                        {user ? (
                             <>
                                 <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                                 <Nav.Link onClick={handleLogout}>Sign out</Nav.Link>

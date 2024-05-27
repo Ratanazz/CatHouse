@@ -1,30 +1,39 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+export const AuthContext = createContext();
 
-const AuthContext = createContext();
-
-const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+export const AuthProvider = ({ children, navigate }) => {
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('auth_token');
-        setIsLoggedIn(!!storedToken); // Check if token exists
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+            setUser(storedUser);
+        }
     }, []);
 
-    const login = (token) => {
-        localStorage.setItem('auth_token', token);
-        setIsLoggedIn(true);
+    const login = (token, userInfo) => {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(userInfo));
+        setUser(userInfo);
+        navigate('/');
     };
 
     const logout = () => {
-        localStorage.removeItem('auth_token');
-        setIsLoggedIn(false);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+        navigate('/login');
+    };
+
+    const getUserRole = () => {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        return storedUser?.role;
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, getUserRole }}>
             {children}
         </AuthContext.Provider>
     );
 };
-
-export { AuthContext, AuthProvider };

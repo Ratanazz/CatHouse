@@ -13,7 +13,7 @@ function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         try {
             const response = await fetch('http://localhost:8000/api/login', {
                 method: 'POST',
@@ -22,14 +22,13 @@ function LoginPage() {
                 },
                 body: JSON.stringify({ email, password })
             });
-            
+
             const data = await response.json();
             console.log(data); // Log the response for debugging
 
             if (response.ok) {
                 setLoginSuccess(true);
-                login(data.token);
-                // Optionally redirect or perform other actions
+                login(data.token, data.user); // Store token and user info
             } else {
                 setLoginSuccess(false);
                 // Handle unsuccessful login, e.g., display an error message

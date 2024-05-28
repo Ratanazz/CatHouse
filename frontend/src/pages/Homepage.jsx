@@ -17,6 +17,15 @@ function Homepage() {
 
         fetchCats(); // Call fetchCats within useEffect
     }, []); // Empty dependency array means this effect runs once on component mount
+    const handleAdoptClick = async (cat) => {
+        try {
+          // Send the cat data to the Laravel server for approval
+          const response = await axios.post('http://127.0.0.1:8000/api/adopt', cat);
+          console.log(response.data); // Handle the response from the server
+        } catch (error) {
+          console.error("Error submitting adoption request:", error);
+        }
+      };
 
     return (
         <div className="cat-card">
@@ -27,6 +36,7 @@ function Homepage() {
                     <h2>{cats.cat_age_type}</h2>
                     <h2>{cats.cat_breed}</h2>
                     <h2>{cats.cat_description}</h2>
+                    <button onClick={() => handleAdoptClick(cats)}>Adopt</button>
 
                 </div>
             ))}

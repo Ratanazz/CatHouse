@@ -14,4 +14,8 @@ class Cat extends Model
             'cat_image' ,
             'cat_description' ,
     ];
+    public function adoptionRequests()
+    {
+        return $this->hasMany(AdoptionRequest::class);
+    }
 }

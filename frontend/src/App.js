@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import Unauthorized from './components/Unauthorized';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdoptionRequests from './pages/AdoptionRequests';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Homepage />} /> 
           <Route path="/home" element={<Homepage />} />
           <Route path="/admincrud" element={<ProtectedRoute allowedRoles={['admin']} element={<AdminCrud />} />} />
+          <Route path="/request" element={<ProtectedRoute allowedRoles={['admin']} element={<AdoptionRequests />} />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />

@@ -53,6 +53,7 @@ function Homepage() {
                         <br />
                         Personality: {cats.cat_breed}
                       </Card.Text>
+                      <button onClick={() => handleAdoptClick(cats)}>Adopt</button>
                     </Card.Body>
                   </Card>
                 </Col>

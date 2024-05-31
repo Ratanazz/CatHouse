@@ -3,7 +3,8 @@ import { MDBBtn, MDBContainer, MDBCard, MDBCardBody, MDBCardImage, MDBRow, MDBCo
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from 'react-router-dom';
-
+import catwellcome from '../assestes/Catwellcome.jpg';
+import pawlogo from '../assestes/pawpaw.png';
 function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -48,12 +49,12 @@ function Register() {
             <MDBCard>
                 <MDBRow className='g-0'>
                     <MDBCol md='4'>
-                        <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp' alt="login form" className='rounded-start w-100' />
+                        <MDBCardImage src={catwellcome} alt="login form" className='rounded-start w-100' />
                     </MDBCol>
                     <MDBCol md='6'>
                         <MDBCardBody className='d-flex flex-column'>
                             <div className='d-flex flex-row mt-2'>
-                                <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#ff6219' }} />
+                            <img src={pawlogo} alt="Login Icon" class="fa-3x me-3" style={{ width:'50px' ,height:'50px'}} />
                                 <span className="h1 fw-bold mb-0">SIGN UP</span>
                             </div>
                             <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px' }}>Register your account</h5>

@@ -9,6 +9,8 @@ function AddCatModal({ show, handleClose }) {
     cat_breed: '',
     cat_age_type: '',
     cat_image: '',
+    cat_image2: '',
+    
   });
 
   const handleChange = (e) => {
@@ -82,6 +84,17 @@ function AddCatModal({ show, handleClose }) {
               onChange={handleChange}
             />
           </Form.Group>
+          <Form.Group controlId="formImage2">
+            <Form.Label>Cat Image</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Cat Image URL"
+              name="cat_image2"
+              value={formData.cat_image2}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          
           <Button variant="primary" type="submit">
             Add
           </Button>

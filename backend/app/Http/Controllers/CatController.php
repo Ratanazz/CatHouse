@@ -25,7 +25,9 @@ class CatController extends Controller
             'cat_name' => 'required|string|max:255',
             'cat_age_type' =>'required|string',
             'cat_breed' =>'required|string',
-            'cat_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cat_image' => 'nullable|string',
+            'cat_image2' => 'nullable|string',
+            
             'cat_description' =>'nullable|string',
         ]);
         $cats = Cat::create($validated);
@@ -53,6 +55,8 @@ public function update(Request $request, Cat $cat) // note the singular 'cat'
         'cat_age_type' =>'required|string',
         'cat_breed' =>'required|string',
         'cat_image' => 'nullable', // or remove the line altogether
+        'cat_image2' => 'nullable|string',
+        
         'cat_description' =>'nullable|string',
     ]);
 

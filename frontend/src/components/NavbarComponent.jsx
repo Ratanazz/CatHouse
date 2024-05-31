@@ -10,8 +10,10 @@ function NavbarComponent() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
+        
         logout();
         navigate('/login');
+        
     };
     useEffect(() => {
         const storedUser = JSON.parse(sessionStorage.getItem('user'));
@@ -34,11 +36,11 @@ function NavbarComponent() {
                     <Nav>
                         {user ? (
                             <>
-                                <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-                                <Nav.Link onClick={handleLogout}>Sign out</Nav.Link>
+                                <Nav.Link as={Link} to="/profile" className='navbar-text'><h2>MyProfile</h2></Nav.Link>
+                                <Nav.Link onClick={handleLogout} className='navbar-text'><h2>Sign out</h2></Nav.Link>
                             </>
                         ) : (
-                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            <Nav.Link as={Link} to="/login" className='navbar-text'><h2>Login</h2></Nav.Link>
                         )}
                     </Nav>
                 </Navbar.Collapse>

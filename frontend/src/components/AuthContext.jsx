@@ -23,7 +23,7 @@ export const AuthProvider = ({ children, navigate }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setUser(null);
-        navigate('/login');
+        
     };
 
     const getUserRole = () => {

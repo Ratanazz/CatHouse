@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Unauthorized from './components/Unauthorized';
 import ProtectedRoute from './components/ProtectedRoute';
 import RequestPage from './pages/RequestPage';
+import CatDetail from './pages/CatDetail';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} /> 
           <Route path="/home" element={<Homepage />} />
+          <Route path="/cat/:id" element={<CatDetail />} />
           <Route path="/admincrud" element={<ProtectedRoute allowedRoles={['admin']} element={<AdminCrud />} />} />
           <Route path="/request" element={<ProtectedRoute allowedRoles={['admin']} element={<RequestPage />} />} />
           <Route path="/unauthorized" element={<Unauthorized />} />

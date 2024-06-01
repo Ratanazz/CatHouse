@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
 import { Cats_API_URL } from '../apiUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +15,11 @@ function CRUDCatsList() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [currentCatId, setCurrentCatId] = useState(null);
   const [csrfToken, setCsrfToken] = useState('');
+  const navigate = useNavigate(); // Create a useNavigate hook instance
+
+  const handleClickrequest = () => {
+    navigate('/request'); // Navigate to /request route on button click
+  };
 
   const handleOpenAddModal = () => setShowAddModal(true);
   const handleCloseAddModal = () => setShowAddModal(false);
@@ -78,6 +84,12 @@ function CRUDCatsList() {
         </header>
 
         <div className="top" style={{ display: 'flex', justifyContent:'space-evenly'}}>
+        <div className="addnew">
+              <button className="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="requestpage"  onClick={handleClickrequest}>
+                Adopt Request <FontAwesomeIcon icon={faEdit} />
+              </button>
+             
+            </div>
             <div className="row mb-2">
               <div className="col-lg-12 mx-auto">
                 <input
@@ -95,6 +107,7 @@ function CRUDCatsList() {
               </button>
               <AddCatModal show={showAddModal} handleClose={handleCloseAddModal} csrfToken={csrfToken} />
             </div>
+            
         </div>
 
         <div className="row">

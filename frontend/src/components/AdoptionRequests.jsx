@@ -80,7 +80,7 @@ const AdoptionRequests = () => {
             <th>Cat Name</th>
             <th>Age Type</th>
             <th>Breed</th>
-            <th>Description</th>
+            
             <th>Image</th>
             <th>Status</th>
             <th>Actions</th>
@@ -92,7 +92,7 @@ const AdoptionRequests = () => {
               <td>{request.cat.cat_name}</td>
               <td>{request.cat.cat_age_type}</td>
               <td>{request.cat.cat_breed}</td>
-              <td>{request.cat.cat_description}</td>
+              
               <td>
                 <img src={request.cat.cat_image} alt={request.cat.cat_name} width="100" />
               </td>

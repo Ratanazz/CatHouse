@@ -11,6 +11,7 @@ import Unauthorized from './components/Unauthorized';
 import ProtectedRoute from './components/ProtectedRoute';
 import RequestPage from './pages/RequestPage';
 import CatDetail from './pages/CatDetail';
+import AboutUs from './pages/AboutUs';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/aboutus" element={<AboutUs />} />
         </Routes>
         <FooterComponent/>
       </Router>

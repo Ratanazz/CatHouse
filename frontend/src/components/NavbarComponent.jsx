@@ -31,7 +31,7 @@ function NavbarComponent() {
                 <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-center">
                     <Nav className="me-auto ms-auto">
                         <Nav.Link as={Link} to="/" className='navbar-text'> <h1>HOME</h1></Nav.Link>
-                        <Nav.Link as={Link} to="/about" className='navbar-text'><h1>ABOUT US</h1></Nav.Link>
+                        <Nav.Link as={Link} to="/aboutus" className='navbar-text'><h1>ABOUT US</h1></Nav.Link>
                     </Nav>
                     <Nav>
                         {user ? (

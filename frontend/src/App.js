@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import RequestPage from './pages/RequestPage';
 import CatDetail from './pages/CatDetail';
 import AboutUs from './pages/AboutUs';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <FooterComponent/>
       </Router>
